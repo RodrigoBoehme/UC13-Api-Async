@@ -30,5 +30,23 @@ export const UsuarioServiceCallback={
         if(!nome||nome.trim().length<2){
             return cb(new Error("Nome Inválido"))
         }
+        //Validacao do email
+        if(!email||!email.includes("@")){
+            return cb(new Error("Email inválido"))
+
+        }
+        //Gera id novo (último id +1)
+        const novoId=usuarios.length?usuarios[usuarios.length-1].id+1:1
+        //Monta o novo usuario
+        const novo:Usuario={
+            id:novoId,
+            nome,
+            email,
+            ativo:true
+        }
+        // INSERT no array
+        usuarios.push(novo)
+        //Devolve o usuario criado 
+        return cb(null,novo)
     }
 }
