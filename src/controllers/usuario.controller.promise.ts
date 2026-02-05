@@ -17,5 +17,11 @@ export const UsuarioControllerPromise={
         .then((user)=>res.json(user))
         .catch((erro)=>res.status(404).json({
         error:erro.message}))
+    },
+    criar(req:Request,res:Response){
+        const{nome,email}=req.body
+        UsuarioServicePromise.criar(nome,email)
+        .then((novo)=>res.status(201).json(novo))
+        .catch((erro)=>res.status(400).json({erro:erro.message}))
     }
 }
